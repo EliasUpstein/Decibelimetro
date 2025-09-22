@@ -1,3 +1,4 @@
+#include <EEPROM.h>
 #include <driver/i2s.h>
 #include "driver/adc.h"
 // Pines I2S del INMP441
@@ -19,39 +20,43 @@
 // Compensacion Frecuencial.
 #define MAX_IIR_ORDER 10  // Define el orden máximo que soportará tu filtro
 
+#define EEPROM_SIZE 512  
+#define EEPROM_FIRST_ADDR 0
+
 typedef struct {
     int order;          // Orden actual del filtro
-    const double* b;  // Coeficientes del numerador
-    const double* a;   // Coeficientes del denominador
+    double b[MAX_IIR_ORDER + 1]; // Coeficientes del numerador
+    double a[MAX_IIR_ORDER + 1];   // Coeficientes del denominador
     double x_history[MAX_IIR_ORDER + 1]; // Historial de entradas
     double y_history[MAX_IIR_ORDER + 1]; // Historial de salidas
 } IIRFilter;
 
 // Filtro compensacion A.
-IIRFilter filter_compA;
-
-static const double filter_b_compA[7] =  {0.234301792299513, -0.468603584599026, -0.234301792299513, 0.937207169198054, -0.234301792299515, -0.468603584599025, 0.234301792299513};
-static const double filter_a_compA[7] =  {1.000000000000000, -4.113043408775871, 6.553121752655047, -4.990849294163381, 1.785737302937573, -0.246190595319487, 0.011224250033231};
-
+IIRFilter filter_compA 
+{
+    .order = 6, // El orden real de tu filtro
+    .b = {0.234301792299513, -0.468603584599026, -0.234301792299513,
+          0.937207169198054, -0.234301792299515, -0.468603584599025, 0.234301792299513},
+    .a = {1.000000000000000, -4.113043408775871, 6.553121752655047,
+          -4.990849294163381, 1.785737302937573, -0.246190595319487, 0.011224250033231},
+    .x_history = {0},
+    .y_history = {0}
+};
 
 // Filtro de calibracion.
 IIRFilter filter_cal;
 
-static const double filter_b_cal[11] = {31.1731764721, -11.1958078377, 17.3522965260, -31.5198533231, 13.3427037312, -8.0573960575, 6.1766219147, -7.7137757576, 9.8510863270, 2.0064312072, 13.8922132609};
-static const double filter_a_cal[11] = {1.0000000000, 0.9629113099, 0.9215213630, 0.7989663617, 0.8075455208, 0.5282350058, 0.5986875691, 0.4440402441, 0.4008130649, 0.2260699122, 0.0850956565};
-
-// Inicializa el filtro con coeficientes
-void iir_init(IIRFilter *filter, int order, const double *b, const double *a) 
+// Recupera el filtro de la EEPROM
+void get_Filter(IIRFilter *filter) 
 {
-    filter->order = order;
-    filter->b = b;
-    filter->a = a;
-    // Inicializar historiales a cero
-    for (int i = 0; i <= order; i++) {
+  EEPROM.begin(EEPROM_SIZE);
+  EEPROM.get(EEPROM_FIRST_ADDR, *filter);
+    for (int i = 0; i <= filter->order ; i++) {
         filter->x_history[i] = 0.0;
         filter->y_history[i] = 0.0;
     }
-    return;
+  EEPROM.end();
+  return;
 }
 
 // Procesa una muestra de entrada
@@ -124,14 +129,64 @@ void i2s_setpin()
   i2s_set_pin(I2S_PORT, &pin_config);
 }
 
+// Guarda el filtro en EEPROM
+void save_Filter(IIRFilter *filter) {
+  EEPROM.begin(EEPROM_SIZE);
+  EEPROM.put(EEPROM_FIRST_ADDR, *filter);
+  EEPROM.commit();
+  EEPROM.end();
+}
+
+// Lee línea de Serial y carga filtro
+bool receive_FilterFromSerial(IIRFilter *filter) 
+{
+  uint16_t index = 0;
+  uint16_t lastIndex = 0;
+  uint16_t filterIndex = 0;
+
+  if (!Serial.available()) return false;
+
+  String input = Serial.readStringUntil('\n'); // Ejemplo: "6;0.1;0.2;...;1.0;-0.5;..."
+  input.trim();
+
+  while ((index = input.indexOf(';', lastIndex)) != -1 && filterIndex < 2*(MAX_IIR_ORDER+1)+1)
+  {
+    String token = input.substring(lastIndex, index);
+    token.trim();
+
+    if (filterIndex == 0) 
+    {
+      filter->order = token.toInt();
+      if (filter->order > MAX_IIR_ORDER) return false; // Protección
+    }
+    else if (filterIndex <= filter->order+1)
+    {
+      filter->b[filterIndex-1] = token.toDouble(); // Coef b
+    }
+    else if (filterIndex <= 2*(filter->order + 1))
+    {
+      filter->a[filterIndex-filter->order-2] = token.toDouble(); // Coef a
+    }
+    filterIndex++;
+    lastIndex = index + 1;
+  }
+
+  // Reset de históricos
+  for (int i = 0; i <= filter->order; i++) {
+    filter->x_history[i] = 0.0;
+    filter->y_history[i] = 0.0;
+  }
+
+  save_Filter(filter); // Guardar en EEPROM
+  return true;
+}
+
 void setup() {
   Serial.begin(115200);
   i2s_install();
   i2s_setpin();
   i2s_start(I2S_PORT);
-
-  iir_init(&filter_compA, 6, filter_b_compA, filter_a_compA);
-  iir_init(&filter_cal, 10, filter_b_cal, filter_a_cal);
+  get_Filter(&filter_cal); 
   delay(500);
 }
 
@@ -190,6 +245,7 @@ bool INMP441_Read(float* db, uint8_t t_mode, uint8_t f_mode, IIRFilter* comp_fil
 
 void loop() 
 {
+  receive_FilterFromSerial(&filter_cal); 
   float dbSPL;
   if ( INMP441_Read(&dbSPL, S_MODE, 0, &filter_compA, &filter_cal) )
   {
