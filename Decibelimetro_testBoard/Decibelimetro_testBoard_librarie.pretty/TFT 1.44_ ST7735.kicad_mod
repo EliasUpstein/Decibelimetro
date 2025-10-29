@@ -1,0 +1,197 @@
+(footprint "TFT 1.44_ ST7735"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -20.5 -17 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "f32bcf22-3f5d-4620-a99e-6a2e24d368ed")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "TFT 1.44\" ST7735"
+		(at 16 17.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "4213ca32-ff17-4843-827a-af56faad7f66")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "45e204a9-8d5f-4360-897d-ae26a7bad994")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2c2be431-5039-494a-92fe-f8ee020a5c33")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_rect
+		(start -22.5 -16)
+		(end 22.5 16)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "19b9f3d8-1213-47f4-b598-f3582d620651")
+	)
+	(fp_circle
+		(center -24 -9)
+		(end -23.5 -9)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+		(uuid "bedcbce3-11cc-4380-84e0-7f289410401d")
+	)
+	(fp_rect
+		(start -22.75 -16.25)
+		(end 22.75 16.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "b37a3df9-1bf5-469d-af09-ac8afacb0595")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 25.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "449de84b-220a-49b9-9a26-e6c72676eb5c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole rect
+		(at -20 -8.9)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "111e33ff-ac54-4881-bac0-ea08c2ea32d3")
+	)
+	(pad "2" thru_hole circle
+		(at -20 -6.36)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "c556e8e9-853e-4233-962a-6567244c9e0c")
+	)
+	(pad "3" thru_hole circle
+		(at -20 -3.82)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "a533d78b-53ff-4695-a610-d913e25b199b")
+	)
+	(pad "4" thru_hole circle
+		(at -20 -1.28)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "3c3acb19-c22c-4cc5-a16b-2b63a717ee2c")
+	)
+	(pad "5" thru_hole circle
+		(at -20 1.28)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "94c0b9f9-9ea9-4b39-b328-cf2b76127dae")
+	)
+	(pad "6" thru_hole circle
+		(at -20 3.82)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "3e11b3d2-d000-4fb3-b349-5850a2f719f3")
+	)
+	(pad "7" thru_hole circle
+		(at -20 6.36)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "9ed10e36-5b6b-4787-8375-2f239daf01ec")
+	)
+	(pad "8" thru_hole circle
+		(at -20 8.9)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "95b0661a-1581-45da-a074-08ad49edba4f")
+	)
+	(group ""
+		(uuid "f7687c88-6356-40fa-af3e-530ad30ac93b")
+		(members "111e33ff-ac54-4881-bac0-ea08c2ea32d3" "3c3acb19-c22c-4cc5-a16b-2b63a717ee2c"
+			"3e11b3d2-d000-4fb3-b349-5850a2f719f3" "94c0b9f9-9ea9-4b39-b328-cf2b76127dae"
+			"95b0661a-1581-45da-a074-08ad49edba4f" "9ed10e36-5b6b-4787-8375-2f239daf01ec"
+			"a533d78b-53ff-4695-a610-d913e25b199b" "c556e8e9-853e-4233-962a-6567244c9e0c"
+		)
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/Libraries/1-44in-lcd-tft-1.snapshot.6/1.44in SPI LCD Module - No Glass.stp"
+		(offset
+			(xyz 0.28 0 2.8)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -90)
+		)
+	)
+	(model "${KIPRJMOD}/Libraries/1-44in-lcd-tft-1.snapshot.6/61300811121+(rev1).stp"
+		(offset
+			(xyz -20 0 1.44)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -180 -90)
+		)
+	)
+)

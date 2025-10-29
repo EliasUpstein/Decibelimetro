@@ -1,0 +1,201 @@
+(footprint "INMP441"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -4.5 -12.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "3823da15-9200-4643-9117-2415e3bc5540")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "INMP441"
+		(at 0.5 8.75 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "de7c63ec-efa7-4dd9-bdaa-6457ab6f2e10")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b840541b-a972-4425-9685-9918847b8c6c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "cb03becf-acd6-4eaf-9188-81f315eedaff")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_arc
+		(start -6.928572 -0.997441)
+		(mid -6.000005 0)
+		(end -6.928572 0.997441)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "8fbb3918-20c3-4606-834e-5c6b06d8c61e")
+	)
+	(fp_arc
+		(start -6.928572 -0.99744)
+		(mid 0 -7)
+		(end 6.928572 -0.997441)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1a09f0a3-c6be-445c-815f-a3398e1743a1")
+	)
+	(fp_arc
+		(start 6.928567 0.997441)
+		(mid 6 0)
+		(end 6.928567 -0.997441)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "2dc2c0b8-1393-4426-836c-bbe2dddaf2ba")
+	)
+	(fp_arc
+		(start 6.928572 0.99744)
+		(mid 0 7)
+		(end -6.928572 0.997441)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c7697b32-cf54-4634-b878-4416516e269c")
+	)
+	(fp_circle
+		(center -8.5 -2.5)
+		(end -8 -2.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+		(uuid "e81fcef5-59d2-4a00-96fe-23660a6c9f3f")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 7.5 0)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "089ffbf0-edbf-4d9f-a7f0-1c39a1fe3b1c")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 13 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "037dc80c-44a1-434f-bc4a-ba15877a4978")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -3.95 -2.54)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "561d6bec-8542-4373-9629-3a84000bb9a8")
+	)
+	(pad "2" thru_hole circle
+		(at -3.95 0)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "767639ef-b0cd-46b2-94a0-6d72cdbf8e16")
+	)
+	(pad "3" thru_hole circle
+		(at -3.95 2.54)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "63061ae0-1688-4f4b-9ab4-9f685097235c")
+	)
+	(pad "4" thru_hole circle
+		(at 3.95 -2.54)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "68e9e982-cd66-42d1-a9bb-232edbf3af04")
+	)
+	(pad "5" thru_hole circle
+		(at 3.95 0)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "6645186e-0331-4045-b348-3353383cc0ee")
+	)
+	(pad "6" thru_hole circle
+		(at 3.95 2.54)
+		(size 2 2)
+		(drill 1.05)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "7baea7d6-b316-4848-b1ed-983116c728ea")
+	)
+	(group ""
+		(uuid "4648431c-919c-4bad-b656-2fa01a0528a2")
+		(members "1a09f0a3-c6be-445c-815f-a3398e1743a1" "2dc2c0b8-1393-4426-836c-bbe2dddaf2ba"
+			"8fbb3918-20c3-4606-834e-5c6b06d8c61e" "c7697b32-cf54-4634-b878-4416516e269c"
+		)
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/Libraries/inmp441-i2s-microphone-module-1.snapshot.1/INMP441 I2S Microphone Module v15.step"
+		(offset
+			(xyz 0 0 2.54)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -0)
+		)
+	)
+)

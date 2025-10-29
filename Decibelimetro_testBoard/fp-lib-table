@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Decibelimetro_testBoard_librarie")(type "KiCad")(uri "${KIPRJMOD}/Decibelimetro_testBoard_librarie.pretty")(options "")(descr ""))
+)
