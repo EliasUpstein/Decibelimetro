@@ -40,8 +40,13 @@ Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 #define BTN_UP   14
 #define BTN_DOWN 27
 
+//Led
+#define LED_UMBRAL 26
+#define dB_UMBRAL 85
+
 #define LECTURA_S 0
 #define CAL_S 1
+
 
 uint8_t state = LECTURA_S;
 
@@ -60,6 +65,7 @@ void setup() {
 
   pinMode(BTN_UP, INPUT_PULLUP);
   pinMode(BTN_DOWN, INPUT_PULLUP);
+  pinMode(LED_UMBRAL, OUTPUT);
 
   i2s_install(SAMPLE_RATE, BLOCK_SIZE);
   i2s_setpin(I2S_SCK, I2S_WS, I2S_SD);
@@ -183,6 +189,11 @@ void loop() {
         tft.print(dbMAX, 1);
         tft.print(" ");
         tft.print(dbMIN, 1);
+
+        if(dbSPL >= dB_UMBRAL)
+          digitalWrite(LED_UMBRAL, HIGH);
+        else
+          digitalWrite(LED_UMBRAL, LOW);
       }
     break;
     case CAL_S:
