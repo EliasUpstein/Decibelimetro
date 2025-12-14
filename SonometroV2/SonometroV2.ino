@@ -11,6 +11,13 @@
 #define TFT_RST 13
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
+#define BG_COLOR ST7735_BLACK
+#define DB_COLOR ST7735_WHITE
+#define MM_COLOR ST7735_GREEN
+#define TT_COLOR ST7735_RED 
+#define T2_COLOR ST7735_BLUE   
+#define CAL_COLOR ST7735_CYAN  
+
 // Pines I2S INMP441
 #define I2S_WS 25
 #define I2S_SD 33
@@ -59,10 +66,10 @@ void setup() {
   i2s_start(I2S_PORT);
 
   tft.initR(INITR_BLACKTAB);
-  tft.setRotation(1);
+  tft.setRotation(0);
   delay(2500);
-  tft.fillScreen(ST77XX_BLACK);
-  tft.setTextColor(ST77XX_WHITE);
+  tft.fillScreen(BG_COLOR);
+  tft.setTextColor(TT_COLOR);
   tft.setTextSize(2);
   tft.setCursor(10, 20);
   tft.println("DECIBELES");
@@ -126,9 +133,9 @@ bool INMP441_Read(float* db, int16_t db_cal)
 
 void tft_refresh(float dbSPL)
 {
-      tft.fillRect(0, 60, 100, 60, ST77XX_BLACK);
+      tft.fillRect(0, 60, 100, 60, BG_COLOR);
       tft.setCursor(10, 60);
-      tft.setTextColor(ST77XX_GREEN);
+      tft.setTextColor(DB_COLOR);
       tft.setTextSize(3);
       tft.print(dbSPL, 1);
       tft.setTextSize(2);
@@ -151,8 +158,8 @@ void loop() {
     case LECTURA_S:
       if(bothPressedNow && !bothPressedLast)
       {
-        tft.fillScreen(ST77XX_BLACK);
-        tft.setTextColor(ST77XX_YELLOW);
+        tft.fillScreen(BG_COLOR);
+        tft.setTextColor(T2_COLOR);
         tft.setTextSize(2);
         tft.setCursor(10, 20);
         tft.println("CALIBRATE");
@@ -169,12 +176,12 @@ void loop() {
         if (dbSPL > dbMAX) dbMAX = dbSPL;
         if (dbSPL < dbMIN) dbMIN = dbSPL;
         tft_refresh(dbSPL);
-        tft.fillRect(10, 100, 140, 30, ST77XX_BLACK); 
+        tft.fillRect(10, 100, 140, 30, BG_COLOR); 
         tft.setCursor(10, 100);
-        tft.setTextColor(ST77XX_YELLOW);
+        tft.setTextColor(MM_COLOR);
         tft.setTextSize(2);
         tft.print(dbMAX, 1);
-        tft.print("  ");
+        tft.print(" ");
         tft.print(dbMIN, 1);
       }
     break;
@@ -182,8 +189,8 @@ void loop() {
       if(bothPressedNow && !bothPressedLast)
       {
         save_cal(cal);
-        tft.fillScreen(ST77XX_BLACK);
-        tft.setTextColor(ST77XX_WHITE);
+        tft.fillScreen(BG_COLOR);
+        tft.setTextColor(TT_COLOR);
         tft.setTextSize(2);
         tft.setCursor(10, 20);
         tft.println("DECIBELES");
@@ -199,9 +206,9 @@ void loop() {
           if (downPressed) cal--;
           lastDisplay = millis();
           tft_refresh(dbSPL);
-          tft.fillRect(10, 100, 140, 30, ST77XX_BLACK); 
+          tft.fillRect(10, 100, 140, 30, BG_COLOR); 
           tft.setCursor(10, 100);
-          tft.setTextColor(ST77XX_YELLOW);
+          tft.setTextColor(CAL_COLOR);
           tft.setTextSize(2);
           tft.print("Cal: ");
           tft.print(( (float) cal )/ 10.0f, 1);

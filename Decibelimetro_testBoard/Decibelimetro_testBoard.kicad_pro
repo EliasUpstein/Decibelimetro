@@ -514,10 +514,10 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "Fabricacion/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "Decibelimetro_testBoard.stl",
       "svg": "",
       "vrml": ""
     },
